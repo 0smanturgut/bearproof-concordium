@@ -10,3 +10,4 @@ coverage/
 keys/
 secrets/
 .DS_Store
+out/
