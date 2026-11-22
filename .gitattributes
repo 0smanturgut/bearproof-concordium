@@ -1,2 +1,4 @@
 # Agent Card files are hosted byte-for-byte and hashed by the registry: never convert line endings.
 agent-card/**/*.json -text
+# Recorded responses whose exact bytes are hashed in tests.
+test/fixtures/served-*.json -text

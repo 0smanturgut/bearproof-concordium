@@ -1,0 +1,60 @@
+{
+  "network": "testnet",
+  "contract_address": {
+    "index": 12802,
+    "subindex": 0
+  },
+  "receive_name": "CIS-8004.register",
+  "parameter_json": {
+    "agent_uri": {
+      "Some": [
+        "https://example.com/card.json"
+      ]
+    },
+    "metadata_hash": {
+      "Some": [
+        [
+          51,
+          89,
+          160,
+          186,
+          229,
+          46,
+          214,
+          34,
+          52,
+          246,
+          151,
+          111,
+          242,
+          233,
+          61,
+          217,
+          229,
+          105,
+          205,
+          92,
+          250,
+          76,
+          46,
+          151,
+          220,
+          43,
+          236,
+          39,
+          116,
+          221,
+          255,
+          46
+        ]
+      ]
+    },
+    "external_reference": {
+      "None": []
+    },
+    "initial_metadata": []
+  },
+  "parameter_hex": "011d00000068747470733a2f2f6578616d706c652e636f6d2f636172642e6a736f6e013359a0bae52ed62234f6976ff2e93dd9e569cd5cfa4c2e97dc2bec2774ddff2e0000000000",
+  "suggested_energy": 30000,
+  "sender": "3whdieGHx43KKRwQYbC5pAUdmWZ61B7yreNRU9i36MtdCvajR8"
+}
