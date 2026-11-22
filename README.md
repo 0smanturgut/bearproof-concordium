@@ -9,8 +9,17 @@ age proof. Concordium testnet.
 
 ## Status
 
-22 Nov 2026: scaffold only. Nothing is deployed, no contract address exists yet, and no number on
-this page is a result. This section is updated as each part ships.
+22 Nov 2026:
+
+- Written: the two Agent Cards ([`agent-card/`](agent-card/)), a zero-dependency library and scripts
+  that validate a card, print the exact hash the registry pins, read the testnet registry, and build
+  the unsigned register / setAgentURI / CIS-8 transactions, plus the operator's steps
+  ([docs/register.md](docs/register.md)). Tests run offline; live read-only checks run with `LIVE=1`.
+- Not done: nothing is registered, no card is hosted, no badge exists, and no transaction has been
+  signed or sent. Both agents are described as they ran in BEARPROOF 1.0; neither is running now.
+- Not started: x402, receipts and the age-proof gate.
+
+No number on this page is a result. This section is updated as each part ships.
 
 ## Pre-existing work and what is new
 
@@ -31,18 +40,31 @@ this page is a result. This section is updated as each part ships.
 - Test traffic: transactions from wallets the team controls are listed in [CLAIMS.md](CLAIMS.md)
   and are not counted as users.
 
-## Planned layout
+## Layout
 
-- `agent-card/`: the Agent Cards and the registration flow
-- `x402/`: the facilitator and the paid verdict endpoint
-- `zk/`: the age-proof gate
-- `receipts/`: anchoring receipts in the registry
+- `agent-card/`: the two source Agent Cards; hosted releases go to `agent-card/published/<release>/`
+  (none yet). See [docs/agent-cards.md](docs/agent-cards.md) for the hash rule and the hosting decision.
+- `src/`: the library (ES modules, fetch and WebCrypto only, so it also runs in a Cloudflare Worker):
+  networks, Base58Check, badge, card validation, parameter and CIS-8 encoders, registry clients.
+- `scripts/card.mjs`: validate, hash, compose and check a hosted card.
+- `scripts/registry.mjs`: testnet reads (status, check-badge, badge block, agent, owner) and unsigned
+  transaction builders. It never signs or submits.
+- `scripts/cis8-sign-solana.mjs`: an offline signer the operator runs on his own machine for the CIS-8
+  link of the Solana prize-wallet key.
+- `docs/`: [register.md](docs/register.md) (operator steps), [api-notes.md](docs/api-notes.md) (what the
+  live services did), [planned-services.md](docs/planned-services.md) (planned, in no card).
+
+Planned, not started: `x402/` (the facilitator and the paid verdict endpoint), `zk/` (the age-proof
+gate), `receipts/` (anchoring receipts in the registry).
 
 ## Run the checks
 
 ```bash
-npm test
+npm test                         # offline
+LIVE=1 npm test                  # adds read-only calls to the testnet registry services
 node scripts/secret-scan.mjs
+node scripts/card.mjs validate   # the cards
+node scripts/registry.mjs status # testnet contracts, node and indexer
 ```
 
 A [CrowLab](https://crowlab.ai) project. MIT licensed.
