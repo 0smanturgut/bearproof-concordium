@@ -87,11 +87,18 @@ async function compose() {
         if (got.owner_account !== owner) fail(`token ${tokenId} is owned by ${got.owner_account}, not ${owner}`);
         if (got.status !== 'Active') fail(`token ${tokenId} is ${got.status}`);
         const ours = await composeBadgeExtension({ networkId: NETWORK_ID, ownerAccount: owner, tokenId, agentWallet: got.agent_wallet });
-        if (!isDeepStrictEqual(ours, got.extension)) {
+        // The service may add params we do not compose (for example an external key once CIS-8 is linked);
+        // those are kept, since the block is pasted verbatim. Every field we do compose must agree.
+        const { params: theirParams, ...theirTop } = got.extension || {};
+        const { params: ourParams, ...ourTop } = ours;
+        const shared = Object.fromEntries(Object.keys(ourParams).map((k) => [k, theirParams?.[k]]));
+        if (!isDeepStrictEqual(ourTop, theirTop) || !isDeepStrictEqual(ourParams, shared)) {
             console.error('The registry returned a badge block that differs from the documented form:');
             console.error(JSON.stringify(got.extension, null, 2));
             fail('stopping so a human can look (the spec may have changed)');
         }
+        const extra = Object.keys(theirParams).filter((k) => !(k in ourParams));
+        if (extra.length) console.log(`note: the registry's block also carries ${extra.join(', ')} (kept as given)`);
         extension = got.extension;
         console.log(`badge ${badge} (token ${tokenId}), block from /v1/get-badge-JSON matches the documented form`);
     }
