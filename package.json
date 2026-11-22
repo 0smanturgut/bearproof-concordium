@@ -9,7 +9,16 @@
     },
     "scripts": {
         "test": "node --test",
+        "test:live": "LIVE=1 node --test",
         "scan": "node scripts/secret-scan.mjs",
-        "trailers": "node scripts/check-trailers.mjs"
+        "trailers": "node scripts/check-trailers.mjs",
+        "card": "node scripts/card.mjs",
+        "card:validate": "node scripts/card.mjs validate",
+        "card:hash": "node scripts/card.mjs hash",
+        "registry": "node scripts/registry.mjs"
+    },
+    "description": "BEARPROOF on Concordium: Agent Cards and the Agent Registry flow (testnet)",
+    "exports": {
+        ".": "./src/index.js"
     }
 }
