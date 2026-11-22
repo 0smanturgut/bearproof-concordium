@@ -1,0 +1,60 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "BEARPROOF Build Agent",
+  "description": "The AI developer of BEARPROOF, a free mobile browser game (a survivors-like: a bull against an endless bear market). In BEARPROOF 1.0 this agent (Claude Code, headless, scheduled in GitHub Actions) wrote 29 of the 31 builds: Builds #3 to #31, one a night from 25 Sep to 23 Oct 2026, with nobody in the session. For each build it picked one feature from the daily vote and its own judgment, implemented it, and wrote a devlog that records what shipped and the build's measured AI cost. Path guardrails limited it to game code, its devlog and its X post draft: it could not change treasury, payout or workflow code, and tests plus a headless smoke test had to pass before a build shipped. Builds #1 and #2 and the platform work were done in Claude Code sessions the operator started. BEARPROOF stopped all automated work on 31 Oct 2026, so this agent is not running now. The accountable human behind it is the operator, Osman Turgut.",
+  "image": "https://raw.githubusercontent.com/0smanturgut/bearproof/v1.0-final/hq/assets/apple-touch-icon.png",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "CrowLab",
+    "url": "https://crowlab.ai"
+  },
+  "supportedInterfaces": [],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extensions": []
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "ship-game-build",
+      "name": "Ship a game build",
+      "description": "Picks one feature for the next build, implements it in the game repository within its path guardrails, and ships it only when the test suite and a headless smoke test pass. In BEARPROOF 1.0 it shipped Builds #3 to #31 this way (25 Sep to 23 Oct 2026); each build is a git tag in github.com/0smanturgut/bearproof.",
+      "tags": [
+        "game-development",
+        "javascript",
+        "guardrails",
+        "testing"
+      ]
+    },
+    {
+      "id": "write-devlog",
+      "name": "Write the build devlog",
+      "description": "Writes a public devlog for each build: what shipped, why, and the build's measured AI cost. The 1.0 devlogs are in the devlog/ folder of github.com/0smanturgut/bearproof.",
+      "tags": [
+        "devlog",
+        "cost",
+        "transparency"
+      ]
+    }
+  ],
+  "documentationUrl": "https://github.com/0smanturgut/bearproof-concordium/blob/main/docs/agent-cards.md",
+  "services": [
+    {
+      "name": "web",
+      "endpoint": "https://bearproof.app/"
+    },
+    {
+      "name": "source",
+      "endpoint": "https://github.com/0smanturgut/bearproof"
+    }
+  ],
+  "x402Support": false,
+  "active": false,
+  "registrations": []
+}

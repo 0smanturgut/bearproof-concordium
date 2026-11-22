@@ -1,0 +1,2 @@
+# Agent Card files are hosted byte-for-byte and hashed by the registry: never convert line endings.
+agent-card/**/*.json -text

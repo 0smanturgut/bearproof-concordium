@@ -1,0 +1,50 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "BEARPROOF Replay Verifier",
+  "description": "The score verifier of BEARPROOF, a free mobile browser game. A run is a small input log. The verifier re-simulates it headlessly with the simulation code of the exact build it was played on, and marks it verified only when the replay reproduces the claimed score, time, kills and level exactly; any mismatch is rejected with the reason. It is deterministic code, not a language model: the simulation uses one seeded RNG, its own trigonometry and a fixed 60 Hz step, so the same log gives the same result across JS engines. In BEARPROOF 1.0 (23 Sep to 31 Oct 2026) it ran as a scheduled GitHub Actions job against the runs players submitted, and only verified runs could win a Daily prize, which was paid from the project's Solana prize wallet. BEARPROOF stopped all automated work on 31 Oct 2026, so the verifier is not accepting runs now. Its source is open at github.com/0smanturgut/bearproof (scripts/verify-runs.mjs, tag v1.0-final). The accountable human behind it is the operator, Osman Turgut.",
+  "image": "https://raw.githubusercontent.com/0smanturgut/bearproof/v1.0-final/hq/assets/apple-touch-icon.png",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "CrowLab",
+    "url": "https://crowlab.ai"
+  },
+  "supportedInterfaces": [],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extensions": []
+  },
+  "defaultInputModes": [
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "verify-replay",
+      "name": "Verify a run replay",
+      "description": "Takes a run's input log and the build it was played on, re-simulates it headlessly, and returns verified, rejected (with the reason) or unverifiable (a build without a deterministic simulation). In BEARPROOF 1.0 only verified runs could rank for and win a Daily prize.",
+      "tags": [
+        "replay",
+        "anti-cheat",
+        "deterministic-simulation",
+        "verification"
+      ]
+    }
+  ],
+  "documentationUrl": "https://github.com/0smanturgut/bearproof-concordium/blob/main/docs/agent-cards.md",
+  "services": [
+    {
+      "name": "web",
+      "endpoint": "https://bearproof.app/"
+    },
+    {
+      "name": "source",
+      "endpoint": "https://github.com/0smanturgut/bearproof"
+    }
+  ],
+  "x402Support": false,
+  "active": false,
+  "registrations": []
+}
